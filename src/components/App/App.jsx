@@ -1,7 +1,7 @@
-import './App.css';
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { nanoid } from 'nanoid';
+import s from './App.module.css';
 import Modal from 'components/Modal/Modal';
 
 function App() {
@@ -72,9 +72,9 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div>
       <form onSubmit={handleSubmit}>
-        <button>Add product</button>
+        <button className={s.button}>Add product</button>
         <ul>
           {products.map(el => (
             <li key={el.id}>{el.name}</li>

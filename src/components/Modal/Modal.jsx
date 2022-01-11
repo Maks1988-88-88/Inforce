@@ -9,7 +9,6 @@ const Modal = ({ setModalState, modalSubmit }) => {
     e.preventDefault();
     setModalState(false);
     modalSubmit(name);
-    console.log(name);
   };
 
   const handleInputChange = e => {
@@ -46,4 +45,5 @@ export default Modal;
 
 Modal.propTypes = {
   setModalState: PropTypes.func.isRequired,
+  modalSubmit: PropTypes.func.isRequired,
 };
