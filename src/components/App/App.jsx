@@ -71,13 +71,22 @@ function App() {
     setProduct([product, ...products]);
   };
 
+  const deleteProduct = id => {
+    setProduct(products.filter(product => product.id !== id));
+  };
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
         <button className={s.button}>Add product</button>
         <ul>
           {products.map(el => (
-            <li key={el.id}>{el.name}</li>
+            <li key={el.id}>
+              {el.name}{' '}
+              <button type="button" onClick={() => deleteProduct(el.id)}>
+                Delete
+              </button>
+            </li>
           ))}
         </ul>
       </form>
