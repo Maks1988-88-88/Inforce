@@ -4,18 +4,38 @@ import React, { useState } from 'react';
 
 const Modal = ({ setModalState, modalSubmit }) => {
   const [name, setName] = useState('');
+  const [count, setCount] = useState('');
+  const [width, setWidth] = useState('');
+  const [height, setHeight] = useState('');
 
   const handleSubmit = e => {
     e.preventDefault();
+    if (name.length < 1) {
+      alert(`product name field is empty `);
+      return;
+    }
     setModalState(false);
-    modalSubmit(name);
+    modalSubmit({ name, count, width, height });
   };
 
   const handleInputChange = e => {
     const { name, value } = e.currentTarget;
+
     switch (name) {
       case 'name':
         setName(value);
+        break;
+
+      case 'count':
+        setCount(value);
+        break;
+
+      case 'width':
+        setWidth(value);
+        break;
+
+      case 'height':
+        setHeight(value);
         break;
 
       default:
@@ -31,11 +51,37 @@ const Modal = ({ setModalState, modalSubmit }) => {
           name="name"
           value={name}
           onChange={handleInputChange}
+          placeholder="name product"
         />
-        <button>Add</button>
-        <button type="button" onClick={() => setModalState(false)}>
-          Close
-        </button>
+        <input
+          type="text"
+          name="count"
+          value={count}
+          onChange={handleInputChange}
+          placeholder="count product"
+        />
+        <div>
+          <input
+            type="text"
+            name="width"
+            value={width}
+            onChange={handleInputChange}
+            placeholder="width size product"
+          />
+          <input
+            type="text"
+            name="height"
+            value={height}
+            onChange={handleInputChange}
+            placeholder="height size product"
+          />
+        </div>
+        <div>
+          <button>Add</button>
+          <button type="button" onClick={() => setModalState(false)}>
+            Close
+          </button>
+        </div>
       </form>
     </div>
   );

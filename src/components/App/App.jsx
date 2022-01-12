@@ -50,21 +50,21 @@ function App() {
   };
 
   const modalSubmit = data => {
-    if (products.some(product => product.name === data)) {
-      alert(`${data} is already in product.`);
+    if (products.some(product => product.name === data.name)) {
+      alert(`${data.name} is already in product.`);
       return;
     }
-    if (data.length < 1) {
-      alert(`error entered empty text`);
+    if (data.name.length < 1) {
+      alert(`error empty text`);
       return;
     }
     const product = {
       id: nanoid(10),
-      name: data,
-      count: 3,
+      name: data.name,
+      count: data.count,
       size: {
-        width: 200,
-        height: 200,
+        width: data.width,
+        height: data.height,
       },
       comments: ['CommentModel', 'CommentModel'],
     };
