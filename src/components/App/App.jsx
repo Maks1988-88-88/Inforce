@@ -3,9 +3,13 @@ import { nanoid } from 'nanoid';
 import s from './App.module.css';
 import AddProduct from 'components/AddProduct/AddProduct';
 import Modal from 'components/Modal/Modal';
+import DeleteProduct from 'components/DeleteProduct/DeleteProduct';
 
 function App() {
   const [modalState, setModalState] = useState(false);
+  const [modalDeleteState, setModalDeleteState] = useState(false);
+  const [IdProd, setIdProd] = useState('');
+
   const [products, setProduct] = useState([
     {
       id: 1,
@@ -75,6 +79,11 @@ function App() {
     setProduct(products.filter(product => product.id !== id));
   };
 
+  const delProd = id => {
+    setIdProd(id);
+    setModalDeleteState(true);
+  };
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -83,19 +92,26 @@ function App() {
           {products.map(el => (
             <li key={el.id}>
               {el.name}{' '}
-              <button type="button" onClick={() => deleteProduct(el.id)}>
+              {/* <button type="button" onClick={() => deleteProduct(el.id)}> */}
+              <button type="button" onClick={() => delProd(el.id)}>
                 Delete
               </button>
             </li>
           ))}
         </ul>
       </form>
-      {/* {modalState && (
-        <AddProduct setModalState={setModalState} modalSubmit={modalSubmit} />
-      )} */}
       {modalState && (
         <Modal title="Add product">
           <AddProduct setModalState={setModalState} modalSubmit={modalSubmit} />
+        </Modal>
+      )}
+      {modalDeleteState && (
+        <Modal title="Delete product">
+          <DeleteProduct
+            setModalDeleteState={setModalDeleteState}
+            deleteProduct={deleteProduct}
+            IdProd={IdProd}
+          />
         </Modal>
       )}
     </div>
