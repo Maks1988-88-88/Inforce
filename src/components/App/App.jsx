@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import ReactDOM from 'react-dom';
 import { nanoid } from 'nanoid';
 import s from './App.module.css';
+import AddProduct from 'components/AddProduct/AddProduct';
 import Modal from 'components/Modal/Modal';
 
 function App() {
@@ -90,11 +90,14 @@ function App() {
           ))}
         </ul>
       </form>
-      {modalState &&
-        ReactDOM.createPortal(
-          <Modal setModalState={setModalState} modalSubmit={modalSubmit} />,
-          document.getElementById('portal'),
-        )}
+      {/* {modalState && (
+        <AddProduct setModalState={setModalState} modalSubmit={modalSubmit} />
+      )} */}
+      {modalState && (
+        <Modal title="Add product">
+          <AddProduct setModalState={setModalState} modalSubmit={modalSubmit} />
+        </Modal>
+      )}
     </div>
   );
 }

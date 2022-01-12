@@ -1,95 +1,22 @@
-import s from './Modal.module.css';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import ReactDOM from 'react-dom';
+import s from './Modal.module.css';
 
-const Modal = ({ setModalState, modalSubmit }) => {
-  const [name, setName] = useState('');
-  const [count, setCount] = useState('');
-  const [width, setWidth] = useState('');
-  const [height, setHeight] = useState('');
-
-  const handleSubmit = e => {
-    e.preventDefault();
-    if (name.length < 1) {
-      alert(`product name field is empty `);
-      return;
-    }
-    setModalState(false);
-    modalSubmit({ name, count, width, height });
-  };
-
-  const handleInputChange = e => {
-    const { name, value } = e.currentTarget;
-
-    switch (name) {
-      case 'name':
-        setName(value);
-        break;
-
-      case 'count':
-        setCount(value);
-        break;
-
-      case 'width':
-        setWidth(value);
-        break;
-
-      case 'height':
-        setHeight(value);
-        break;
-
-      default:
-        break;
-    }
-  };
-
-  return (
-    <div>
-      <form className={s.modal} onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="name"
-          value={name}
-          onChange={handleInputChange}
-          placeholder="name product"
-        />
-        <input
-          type="text"
-          name="count"
-          value={count}
-          onChange={handleInputChange}
-          placeholder="count product"
-        />
-        <div>
-          <input
-            type="text"
-            name="width"
-            value={width}
-            onChange={handleInputChange}
-            placeholder="width size product"
-          />
-          <input
-            type="text"
-            name="height"
-            value={height}
-            onChange={handleInputChange}
-            placeholder="height size product"
-          />
-        </div>
-        <div>
-          <button>Add</button>
-          <button type="button" onClick={() => setModalState(false)}>
-            Close
-          </button>
-        </div>
-      </form>
-    </div>
+function Modal({ title, children }) {
+  return ReactDOM.createPortal(
+    <div className={s.modal}>
+      <div className={s.modal__Container}>
+        <h2 className={s.modal__title}>{title}</h2>
+        {children}
+      </div>
+    </div>,
+    document.getElementById('portal'),
   );
+}
+
+Modal.propTypes = {
+  title: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default Modal;
-
-Modal.propTypes = {
-  setModalState: PropTypes.func.isRequired,
-  modalSubmit: PropTypes.func.isRequired,
-};
