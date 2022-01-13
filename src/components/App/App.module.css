@@ -12,9 +12,27 @@
   display: inline-block;
   font-size: 16px;
   cursor: pointer;
+  margin-left: 10px;
 }
 
 .image__product {
   width: 100px;
   height: 100px;
+}
+
+.list {
+  list-style: none;
+}
+
+.product {
+  display: flex;
+  flex-direction: column;
+  width: 100px;
+  text-align: center;
+}
+
+.filter {
+  position: absolute;
+  top: 10px;
+  left: 175px;
 }

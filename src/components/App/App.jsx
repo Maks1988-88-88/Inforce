@@ -13,7 +13,7 @@ function App() {
     {
       id: '1',
       name: 'Apple',
-      count: 3,
+      count: 1,
       imageUrl:
         'https://media.istockphoto.com/photos/red-apple-picture-id153010865?k=20&m=153010865&s=612x612&w=0&h=Phcp8v4vwePUzd06jA5cAxuX9FtZC8RKOqTeo1hX0gc=',
       size: {
@@ -113,6 +113,7 @@ function App() {
   return (
     <div>
       <select
+        className={s.filter}
         onChange={e => {
           const select = e.target.value;
           console.log(select);
@@ -125,9 +126,9 @@ function App() {
       <form onSubmit={handleSubmit}>
         <button className={s.button}>Add product</button>
       </form>
-      <ul>
+      <ul className={s.list}>
         {products.map(el => (
-          <li key={el.id}>
+          <li key={el.id} className={s.product}>
             <img src={el.imageUrl} alt={el.name} className={s.image__product} />
             {el.name}
             <button type="button" onClick={() => delProd(el.id)}>
