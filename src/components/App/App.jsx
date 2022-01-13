@@ -9,27 +9,30 @@ function App() {
   const [modalState, setModalState] = useState(false);
   const [modalDeleteState, setModalDeleteState] = useState(false);
   const [IdProd, setIdProd] = useState('');
-
   const [products, setProduct] = useState([
     {
       id: 1,
       name: 'Apple',
       count: 3,
+      imageUrl:
+        'https://media.istockphoto.com/photos/red-apple-picture-id153010865?k=20&m=153010865&s=612x612&w=0&h=Phcp8v4vwePUzd06jA5cAxuX9FtZC8RKOqTeo1hX0gc=',
       size: {
         width: 200,
         height: 200,
       },
-      comments: ['CommentModel', 'CommentModel'],
+      comments: ['Comment1', 'Comment2'],
     },
     {
       id: 2,
-      name: 'Pear',
+      name: 'Bannana',
       count: 2,
+      imageUrl:
+        'https://media.istockphoto.com/photos/banana-picture-id120492078?k=20&m=120492078&s=612x612&w=0&h=x37kUXEGg7BXcURecliAfeEErNxJgrmaq2Gc2FTFNUg=',
       size: {
         width: 200,
         height: 200,
       },
-      comments: ['CommentModel', 'CommentModel'],
+      comments: ['Comment3', 'Comment3'],
     },
   ]);
 
@@ -66,11 +69,12 @@ function App() {
       id: nanoid(10),
       name: data.name,
       count: data.count,
+      imageUrl: data.image,
       size: {
         width: data.width,
         height: data.height,
       },
-      comments: ['CommentModel', 'CommentModel'],
+      comments: [data.comment],
     };
     setProduct([product, ...products]);
   };
@@ -91,8 +95,12 @@ function App() {
         <ul>
           {products.map(el => (
             <li key={el.id}>
-              {el.name}{' '}
-              {/* <button type="button" onClick={() => deleteProduct(el.id)}> */}
+              <img
+                src={el.imageUrl}
+                alt={el.name}
+                className={s.image__product}
+              />
+              {el.name}
               <button type="button" onClick={() => delProd(el.id)}>
                 Delete
               </button>

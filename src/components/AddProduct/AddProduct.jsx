@@ -7,6 +7,8 @@ const AddProduct = ({ setModalState, modalSubmit }) => {
   const [count, setCount] = useState('');
   const [width, setWidth] = useState('');
   const [height, setHeight] = useState('');
+  const [comment, setComment] = useState('');
+  const [image, setImage] = useState('');
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -15,7 +17,7 @@ const AddProduct = ({ setModalState, modalSubmit }) => {
       return;
     }
     setModalState(false);
-    modalSubmit({ name, count, width, height });
+    modalSubmit({ name, count, width, height, comment, image });
   };
 
   const handleInputChange = e => {
@@ -36,6 +38,14 @@ const AddProduct = ({ setModalState, modalSubmit }) => {
 
       case 'height':
         setHeight(value);
+        break;
+
+      case 'comment':
+        setComment(value);
+        break;
+
+      case 'image':
+        setImage(value);
         break;
 
       default:
@@ -74,6 +84,20 @@ const AddProduct = ({ setModalState, modalSubmit }) => {
           placeholder="height size product"
         />
       </div>
+      <input
+        type="text"
+        name="comment"
+        value={comment}
+        onChange={handleInputChange}
+        placeholder="comment"
+      />
+      <input
+        type="text"
+        name="image"
+        value={image}
+        onChange={handleInputChange}
+        placeholder="imageUrl"
+      />
       <div>
         <button>Add</button>
         <button type="button" onClick={() => setModalState(false)}>
