@@ -21,5 +21,5 @@ export default DeleteProduct;
 DeleteProduct.propTypes = {
   setModalDeleteState: PropTypes.func.isRequired,
   deleteProduct: PropTypes.func.isRequired,
-  IdProd: PropTypes.number.isRequired,
+  IdProd: PropTypes.string.isRequired,
 };

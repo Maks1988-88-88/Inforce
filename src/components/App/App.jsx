@@ -11,7 +11,7 @@ function App() {
   const [IdProd, setIdProd] = useState('');
   const [products, setProduct] = useState([
     {
-      id: 1,
+      id: '1',
       name: 'Apple',
       count: 3,
       imageUrl:
@@ -23,7 +23,7 @@ function App() {
       comments: ['Comment1', 'Comment2'],
     },
     {
-      id: 2,
+      id: '2',
       name: 'Bannana',
       count: 2,
       imageUrl:
@@ -68,7 +68,7 @@ function App() {
     const product = {
       id: nanoid(10),
       name: data.name,
-      count: data.count,
+      count: +data.count,
       imageUrl: data.image,
       size: {
         width: data.width,
@@ -88,26 +88,55 @@ function App() {
     setModalDeleteState(true);
   };
 
+  const sortProduct = select => {
+    if (select === 'count') {
+      const sortByCount = (a, b) => b.count - a.count;
+      // console.log(products.sort(sortByCount));
+      setProduct([...products.sort(sortByCount)]);
+      console.log(products);
+    }
+    if (select === 'alphabet') {
+      const sortByName = (a, b) => {
+        if (a.name < b.name) {
+          return -1;
+        }
+        if (a.name > b.name) {
+          return 1;
+        }
+      };
+      // console.log(products.sort(sortByName));
+      setProduct([...products.sort(sortByName)]);
+      console.log(products);
+    }
+  };
+
   return (
     <div>
+      <select
+        onChange={e => {
+          const select = e.target.value;
+          console.log(select);
+          sortProduct(select);
+        }}
+      >
+        <option value="alphabet">Alphabet</option>
+        <option value="count">Count</option>
+      </select>
       <form onSubmit={handleSubmit}>
         <button className={s.button}>Add product</button>
-        <ul>
-          {products.map(el => (
-            <li key={el.id}>
-              <img
-                src={el.imageUrl}
-                alt={el.name}
-                className={s.image__product}
-              />
-              {el.name}
-              <button type="button" onClick={() => delProd(el.id)}>
-                Delete
-              </button>
-            </li>
-          ))}
-        </ul>
       </form>
+      <ul>
+        {products.map(el => (
+          <li key={el.id}>
+            <img src={el.imageUrl} alt={el.name} className={s.image__product} />
+            {el.name}
+            <button type="button" onClick={() => delProd(el.id)}>
+              Delete
+            </button>
+          </li>
+        ))}
+      </ul>
+      {/* </form> */}
       {modalState && (
         <Modal title="Add product">
           <AddProduct setModalState={setModalState} modalSubmit={modalSubmit} />
