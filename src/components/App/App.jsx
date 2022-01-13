@@ -57,7 +57,11 @@ function App() {
   };
 
   const modalSubmit = data => {
-    if (products.some(product => product.name === data.name)) {
+    if (
+      products.some(
+        product => product.name.toLowerCase() === data.name.toLowerCase(),
+      )
+    ) {
       alert(`${data.name} is already in product.`);
       return;
     }
