@@ -14,7 +14,7 @@
 }
 
 .modal__Container {
-  /* width: 500px; */
+  min-width: 300px;
   background: gray;
   border-radius: 30px;
 }

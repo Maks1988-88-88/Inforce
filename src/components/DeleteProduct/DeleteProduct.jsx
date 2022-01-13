@@ -1,4 +1,4 @@
-// import s from './DeleteProduct.module.css';
+import s from './DeleteProduct.module.css';
 import PropTypes from 'prop-types';
 
 const DeleteProduct = ({ setModalDeleteState, deleteProduct, IdProd }) => {
@@ -7,7 +7,7 @@ const DeleteProduct = ({ setModalDeleteState, deleteProduct, IdProd }) => {
     setModalDeleteState(false);
   };
   return (
-    <div>
+    <div className={s.btn__position}>
       <button onClick={() => deleteCurrentProduct(IdProd)}>Yes</button>
       <button type="button" onClick={() => setModalDeleteState(false)}>
         No
